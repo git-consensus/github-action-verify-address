@@ -1,0 +1,7 @@
+name: 'Wallet Address Checker'
+author: 'Youn Jae Kim'
+description: 'Custom Wallet Address Checker Action'
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
