@@ -1,0 +1,12 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Commit Message Print
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Commit Address Check
+        id: Testing
+        uses: git-consensus/github-action-verify-address@v1.0
