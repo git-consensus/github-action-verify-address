@@ -29,3 +29,28 @@ We are able to change the separator with this as an option:
     with:
     separator: "\n"
 ```
+
+## Invoking the action only when the pull request is merging (Example):
+```yaml
+on:
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    name: Commit Message Print
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Commit Addres Check
+        id: Testing
+        uses: git-consensus/github-action-verify-address@v1.2
+#        uses: aagusuab/wallet-commit-check-action@v9.3
+        with:
+          separator: " "
+
+
+```
