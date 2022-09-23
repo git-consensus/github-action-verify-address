@@ -14,9 +14,13 @@ async function run(): Promise<void> {
 
         const splits = message.split(" ")
         let isValid = false
-        for (let split of splits) {
-            if (ethers.utils.isAddress(split.trim())) {
-                isValid = true
+        if ((splits.length == 1) && ethers.utils.isAddress(splits[0].trim())){
+            isValid = true
+        } else {
+            for (let split of splits) {
+                if (ethers.utils.isAddress(split.trim())) {
+                    isValid = true
+                }
             }
         }
         if (!isValid) {
