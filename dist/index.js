@@ -49361,15 +49361,21 @@ const exec = __importStar(__nccwpck_require__(2049));
 const ethers_1 = __nccwpck_require__(3519);
 async function run() {
     try {
+        const separator = core.getInput('separator', { trimWhitespace: false });
         const commitSHA = github.context.sha;
         core.debug(`Commit Message SHA:${commitSHA}`);
         const message = await getCommitMessage(commitSHA);
         core.debug(`Commit Message Found:\n${message}`);
-        const splits = message.split(" ");
         let isValid = false;
-        for (let split of splits) {
-            if (ethers_1.ethers.utils.isAddress(split.trim())) {
-                isValid = true;
+        const splits = message.split(separator);
+        if ((splits.length === 1) && ethers_1.ethers.utils.isAddress(splits[0].trim())) {
+            isValid = true;
+        }
+        else {
+            for (let split of splits) {
+                if (ethers_1.ethers.utils.isAddress(split.trim())) {
+                    isValid = true;
+                }
             }
         }
         if (!isValid) {
@@ -49394,8 +49400,7 @@ async function getCommitMessage(sha) {
     };
     const args = ["rev-list", "--format=%B", "--max-count=1", sha];
     await exec.exec("git", args, options);
-    message.trim();
-    return message;
+    return message.substring(48).trim();
 }
 exports.getCommitMessage = getCommitMessage;
 run();
