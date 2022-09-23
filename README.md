@@ -14,7 +14,7 @@ Create a workflow like the one below (also in example directory):
 ```
 
 NOTE:
-The PR commit message wallet address must be seperated by a space " " character from the message.
+The PR commit message wallet address must be seperated by a separator input (default: space) from the message.
 Example:
 initial commit 0x0... (O)
 
@@ -22,4 +22,10 @@ github commit 0x0... message (O)
 
 commit message0x0... (X)
 
+We are able to change the separator with this as an option:
 
+## Custom Separator (Example)
+```yaml
+    with:
+    separator: "\n"
+```
