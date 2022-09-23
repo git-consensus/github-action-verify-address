@@ -2,6 +2,11 @@ name: 'Wallet Address Checker'
 author: 'Youn Jae Kim'
 description: 'Custom Wallet Address Checker Action'
 
+inputs:
+  separator:
+    description: 'This will determine how the messages will be split for wallet address validation.'
+    required: true
+    default: " "
 runs:
   using: 'node16'
   main: 'dist/index.js'
